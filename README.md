@@ -39,15 +39,19 @@ This RPG starter pack contains assets for the following
 
 ## Whats Not Included
 
-- **Collision**: There is currently no collision setup, the player can walk endlessly and through anything
+- **Collision**: There is currently no collision setup, the player can walk
+                    endlessly and through anything
 
 - **Fighting**: The enemy currently does nothing, victory, or losing scenario
 
-- **End projectiles**: The projectiles will continue on forever, never disappearing or being removed
+- **End projectiles**: The projectiles will continue on forever, never
+                        disappearing or being removed
 
 - **Victory/End**: There is no current victory scenario or way to lose
 
 - **Items**: No items or item menu is included
 
-- **Other**: As there is no real way for me to list everything that is common in an RPG, I have only listed the main things that are currently missing from this that others may want included.
-             Other details may also be missing, but may be added in the future
+- **Other**: As there is no real way for me to list everything that is common
+            in an RPG, I have only listed the main things that are currently
+            missing from this that others may want included. Other details may
+            also be missing, but may be added in the future
