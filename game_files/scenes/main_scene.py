@@ -1,4 +1,3 @@
-import json
 import pygame
 import time
 
@@ -26,8 +25,8 @@ class MainScene(Scene):
 
         MAP  =  [[101,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,91,102], 
                  [81,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 79], 
-                 [81,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,79], 
-                 [81,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,71, 0, 0, 0, 0, 0, 0, 0, 0, 0,79], 
+                 [81,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 79], 
+                 [81,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 71, 0, 0, 0, 0, 0, 0, 0, 0, 0,79], 
                  [81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,79],
                  [81, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,79],
                  [81, 0, 0, 0, 0, 0, 0, 0, 0,71, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,79],
@@ -55,16 +54,19 @@ class MainScene(Scene):
         self.camera = Camera(self.screen, self.player)
 
         # User input system
-        self.keybinds = {pygame.K_w: "up",
-                         pygame.K_s: "down",
-                         pygame.K_a: "left",
-                         pygame.K_d: "right"}
+        self.keybinds = {
+            pygame.K_w: "up",
+            pygame.K_s: "down",
+            pygame.K_a: "left",
+            pygame.K_d: "right"
+        }
+
         self.keystack = []
         self.current_key = None
 
         self.projectiles = []
 
-    def update(self) -> None:
+    def update(self):
         if self.previous_time is None:
             # First run through the loop needs a previous_time value to compute
             #  delta time to ensure everything is on the same time
@@ -82,7 +84,7 @@ class MainScene(Scene):
 
         self.camera.update(dt)
 
-    def render(self) -> None:
+    def render(self):
         # Clear screen
         self.screen.fill((30, 124, 184))
 
@@ -106,7 +108,7 @@ class MainScene(Scene):
         # Update display
         pygame.display.update()
 
-    def poll_events(self) -> None:
+    def poll_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:  # If the user closes the window
                 self.manager.quit_game()
