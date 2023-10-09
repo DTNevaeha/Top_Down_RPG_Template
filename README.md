@@ -1,6 +1,6 @@
 # Top_Down_RPG_Template
 
-Top_Down_RPG_Template is not a full game, this is just a template starter pack for creating a RPG in Python using pygames.
+Top_Down_RPG_Template is a template starter pack for creating a RPG in Python using pygames.
 Developed in Python using Pygame library. This game features movement, animations, projectiles, and more.
 This project was originally created for self learning purposes, but may be used as an initial setup for creating an RPG.
 If you choose to use this please give credit, and I'd love to hear from you to know if you enjoy this.
