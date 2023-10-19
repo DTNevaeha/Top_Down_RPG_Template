@@ -66,6 +66,7 @@ class MainScene(Scene):
 
         self.projectiles = []
 
+
     def update(self):
         if self.previous_time is None:
             # First run through the loop needs a previous_time value to compute

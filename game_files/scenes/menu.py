@@ -46,14 +46,11 @@ class MenuScene(Scene):
 
         for button in self.buttons:
             # If mouse pointer is hovering over a button then set true
-            if button.hovered is False and button.rect.collidepoint(mouse_x,
-                                                                    mouse_y):
+            if button.hovered is False and button.rect.collidepoint(mouse_x, mouse_y):
                 button.hovered = True
 
             # If mouse stops hovering over the button then set false
-            if button.hovered is True and not button.rect.collidepoint(
-                mouse_x, mouse_y
-            ):
+            if button.hovered is True and not button.rect.collidepoint(mouse_x, mouse_y):
                 button.hovered = False
 
         self.quit_button.update(dt)

@@ -14,48 +14,34 @@ class Player:
         self.animations = AnimationManager(sprite_sheets, 16, 4)
 
         # Walking animations
-        self.animations.register_animation(
-            "walking_right", [3, 7, 11, 15], "walking_animations"
-        )
-        self.animations.register_animation(
-            "walking_left", [2, 6, 10, 14], "walking_animations"
-        )
-        self.animations.register_animation(
-            "walking_up", [1, 5, 9, 13], "walking_animations"
-        )
-        self.animations.register_animation(
-            "walking_down", [0, 4, 8, 12], "walking_animations"
-        )
+        self.animations.register_animation("walking_right", [3, 7, 11, 15], "walking_animations")
+        self.animations.register_animation("walking_left", [2, 6, 10, 14], "walking_animations")
+        self.animations.register_animation("walking_up", [1, 5, 9, 13], "walking_animations")
+        self.animations.register_animation("walking_down", [0, 4, 8, 12], "walking_animations")
 
         # Stationary sprites
-        self.animations.register_animation(
-            "stationary_down", [0, 0, 0, 0], "walking_animations"
-        )
-        self.animations.register_animation(
-            "stationary_up", [1, 1, 1, 1], "walking_animations"
-        )
-        self.animations.register_animation(
-            "stationary_left", [2, 2, 2, 2], "walking_animations"
-        )
-        self.animations.register_animation(
-            "stationary_right", [3, 3, 3, 3], "walking_animations"
-        )
+        self.animations.register_animation("stationary_down", [0, 0, 0], "walking_animations")
+        self.animations.register_animation("stationary_up", [1, 1, 1], "walking_animations")
+        self.animations.register_animation("stationary_left", [2, 2, 2], "walking_animations")
+        self.animations.register_animation("stationary_right", [3, 3, 3], "walking_animations")
 
         # Attacks
-        self.animations.register_animation(
-            "attack_down", [0, 0, 0, 0], "attack_animation"
-        )
-        self.animations.register_animation(
-            "attack_up", [1, 1, 1, 1], "attack_animation"
-        )
-        self.animations.register_animation(
-            "attack_left", [2, 2, 2, 2], "attack_animation"
-        )
-        self.animations.register_animation(
-            "attack_right", [3, 3, 3, 3], "attack_animation"
-        )
+        self.animations.register_animation("attack_down", [0, 0, 0], "attack_animation")
+        self.animations.register_animation("attack_up", [1, 1, 1], "attack_animation")
+        self.animations.register_animation("attack_left", [2, 2, 2], "attack_animation")
+        self.animations.register_animation("attack_right", [3, 3, 3], "attack_animation")
 
     def move(self, dt):
+        # Prevent the player from leaving the set map
+        if self.y < 0:
+            self.y = 0
+        elif self.x < 0:
+            self.x = 0
+        # elif self.y > 720:
+        #     self.y = 720
+        # elif self.x > 1280:
+        #     self.x = 1280
+
         if self.direction == "up":
             self.y -= self.velocity * dt
         elif self.direction == "down":
@@ -66,8 +52,7 @@ class Player:
             self.x += self.velocity * dt
 
     def attack(self):
-        self.animations.activate_animation("attack_" + self.direction, 0.1,
-                                           False)
+        self.animations.activate_animation("attack_" + self.direction, 0.1, False)
 
     def set_direction(self, new_direction: str):
         self.direction = new_direction
@@ -78,8 +63,7 @@ class Player:
 
     def stop_moving(self):
         self.moving = False
-        self.animations.activate_animation("stationary_" + self.direction,
-                                           0.1, True)
+        self.animations.activate_animation("stationary_" + self.direction, 0.1, True)
 
     def update(self, dt):
         if self.moving:
@@ -88,8 +72,7 @@ class Player:
         self.animations.update(dt)
 
     def render(self, screen: pygame.Surface, camera_adjustment: tuple):
-        screen.blit(self.animations.get_current_sprite(),
-                    (
-                        self.x + camera_adjustment[0],
-                        self.y + camera_adjustment[1]
-                    ))
+        screen.blit(
+            self.animations.get_current_sprite(),
+            (self.x + camera_adjustment[0], self.y + camera_adjustment[1]),
+        )
