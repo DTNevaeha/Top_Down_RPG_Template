@@ -4,13 +4,7 @@ from game_files.tiles.tileset import Tileset
 
 
 class Tile:
-    def __init__(
-            self,
-            x,
-            y,
-            sprite: pygame.Surface,
-            sprite_id: int
-    ):
+    def __init__(self, x, y, sprite: pygame.Surface, sprite_id: int):
         self.x = x
         self.y = y
         self.sprite = sprite
