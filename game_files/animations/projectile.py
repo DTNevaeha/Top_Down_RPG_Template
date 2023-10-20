@@ -12,10 +12,7 @@ class Projectile:
         self.direction = "right"
 
         self.animations = AnimationManager(sprite_sheets, 16, 2)
-        self.animations.register_animation("projectile",
-                                           [0, 1, 2, 3, 4],
-                                           "projectile"
-                                           )
+        self.animations.register_animation("projectile", [0, 1, 2, 3, 4], "projectile")
         self.animations.activate_animation("projectile", 0.1, True)
 
     def move(self, dt):
@@ -36,9 +33,7 @@ class Projectile:
         self.move(dt)
 
     def render(self, screen: pygame.Surface, camera_adjustment: tuple):
-        screen.blit(self.animations.get_current_sprite(),
-                    (
-                        self.x + camera_adjustment[0],
-                        self.y + camera_adjustment[1]
-                    )
-                    )
+        screen.blit(
+            self.animations.get_current_sprite(),
+            (self.x + camera_adjustment[0], self.y + camera_adjustment[1]),
+        )

@@ -26,10 +26,10 @@ class Player:
         self.animations.register_animation("stationary_right", [3, 3, 3], "walking_animations")
 
         # Attacks
-        self.animations.register_animation("attack_down", [0, 0, 0], "attack_animation")
-        self.animations.register_animation("attack_up", [1, 1, 1], "attack_animation")
-        self.animations.register_animation("attack_left", [2, 2, 2], "attack_animation")
-        self.animations.register_animation("attack_right", [3, 3, 3], "attack_animation")
+        self.animations.register_animation("attack_down", [0, 0, 0, 0], "attack_animation")
+        self.animations.register_animation("attack_up", [1, 1, 1, 1], "attack_animation")
+        self.animations.register_animation("attack_left", [2, 2, 2, 2], "attack_animation")
+        self.animations.register_animation("attack_right", [3, 3, 3, 3], "attack_animation")
 
     def move(self, dt):
         # Prevent the player from leaving the set map. This only works if the map size never changes

@@ -5,10 +5,7 @@ from game_files.tiles.tileset import Tileset
 
 
 class AnimationManager:
-    def __init__(self,
-                 sprite_sheets: dict,
-                 tile_size: int,
-                 scale: int):
+    def __init__(self, sprite_sheets: dict, tile_size: int, scale: int):
         self.tilesets = {}
 
         for sprite in sprite_sheets:
@@ -21,20 +18,12 @@ class AnimationManager:
 
         # Get whatever is first set in our tileset, this dummy animation
         # shouldnt ever actually be played.
-        self.active_animation = Animation("dummy",
-                                          self.tilesets[list(
-                                              self.tilesets.keys())[0]], [0])
-
-    def register_animation(self,
-                           name: str,
-                           sprite_ids: list[int],
-                           tileset: str
-                           ):
-        self.animations[name] = Animation(
-            name,
-            self.tilesets[tileset],
-            sprite_ids
+        self.active_animation = Animation(
+            "dummy", self.tilesets[list(self.tilesets.keys())[0]], [0]
         )
+
+    def register_animation(self, name: str, sprite_ids: list[int], tileset: str):
+        self.animations[name] = Animation(name, self.tilesets[tileset], sprite_ids)
 
     def get_current_sprite(self) -> pygame.Surface:
         # If there is an active animation then get the sprite for that

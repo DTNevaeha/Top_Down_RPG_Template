@@ -66,7 +66,6 @@ class MainScene(Scene):
 
         self.projectiles = []
 
-
     def update(self):
         if self.previous_time is None:
             # First run through the loop needs a previous_time value to compute
@@ -117,12 +116,34 @@ class MainScene(Scene):
             # Attack controls
             if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 self.player.attack()
-                projectile = Projectile(
-                    {
-                        "projectile": self.sprites["projectile"]
-                    },
-                    self.player.x, self.player.y
-                )
+                if self.player.direction == "up":
+                    projectile = Projectile(
+                        {
+                            "projectile": self.sprites["projectile"]
+                        },
+                        self.player.x + 16, self.player.y - 16
+                    )
+                elif self.player.direction == "down":
+                    projectile = Projectile(
+                        {
+                            "projectile": self.sprites["projectile"]
+                        },
+                        self.player.x + 16, self.player.y + 50
+                    )
+                elif self.player.direction == "left":
+                    projectile = Projectile(
+                        {
+                            "projectile": self.sprites["projectile"]
+                        },
+                        self.player.x - 16, self.player.y + 16
+                    )
+                elif self.player.direction == "right":
+                    projectile = Projectile(
+                        {
+                            "projectile": self.sprites["projectile"]
+                        },
+                        self.player.x + 50, self.player.y + 16
+                    )
                 projectile.set_direction(self.player.direction)
                 self.projectiles.append(projectile)
 
@@ -138,7 +159,7 @@ class MainScene(Scene):
                     self.current_key = self.keystack[-1]
 
                     self.player.set_direction(self.keybinds[self.current_key])
-                    self.player.start_moving("walking_" + self.keybinds[event.key])  # noqa: E501
+                    self.player.start_moving("walking_" + self.keybinds[event.key])
 
             # If keystack is empty, then player stops moving
             if len(self.keystack) == 0:

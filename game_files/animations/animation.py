@@ -4,10 +4,7 @@ from game_files.tiles.tileset import Tileset
 
 
 class Animation:
-    def __init__(self,
-                 name: str,
-                 tileset: Tileset,
-                 keyframes: list[int]):
+    def __init__(self, name: str, tileset: Tileset, keyframes: list[int]):
         self.name = name
         self.tileset = tileset
         self.keyframes = keyframes
@@ -37,7 +34,6 @@ class Animation:
         if self.keyframe_time >= self.animation_frequency:
             # Check to see if we are at the end of the animation loop
             if len(self.keyframes) - 1 <= self.current_keyframe:
-
                 # if at the end of the animation then restart it
                 if self.loop_animation is True:
                     self.current_keyframe = 0

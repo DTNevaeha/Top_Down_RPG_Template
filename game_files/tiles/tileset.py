@@ -3,11 +3,7 @@ import pygame
 
 class Tileset:
     def __init__(
-        self,
-        filename: str,
-        original_tilesize: int,
-        scale_factor: int = 1,
-        sprites=None
+        self, filename: str, original_tilesize: int, scale_factor: int = 1, sprites=None
     ):
         # If there is no sprite set then use filename else use sprites setting
         if sprites is None:
@@ -25,8 +21,7 @@ class Tileset:
             for x in range(int(self.tilesheet.get_width() / self.tilesize)):
                 # Sets x, y, height, width cordinates
                 tile_rect = pygame.Rect(
-                    x * self.tilesize, y * self.tilesize,
-                    self.tilesize, self.tilesize
+                    x * self.tilesize, y * self.tilesize, self.tilesize, self.tilesize
                 )
 
                 tile_image = self.tilesheet.subsurface(tile_rect)
@@ -36,7 +31,7 @@ class Tileset:
                     tile_image,
                     (
                         tile_image.get_width() * self.scale_factor,
-                        tile_image.get_height() * self.scale_factor
+                        tile_image.get_height() * self.scale_factor,
                     ),
                 )
 
