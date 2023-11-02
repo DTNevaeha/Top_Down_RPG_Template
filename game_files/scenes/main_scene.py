@@ -3,31 +3,24 @@ import time
 import json
 
 from game_files.animations.projectile import Projectile
-
 from game_files.camera import Camera
-
-from game_files.pygame_util import SceneManager
-from game_files.pygame_util import Scene
-
-from game_files.players.player import Player
 from game_files.players.enemy import Enemy
-
-from game_files.tiles.tileset import Tileset
+from game_files.players.player import Player
+from game_files.pygame_util import SceneManager, Scene
 from game_files.tiles.tilemap import Tilemap
+from game_files.tiles.tileset import Tileset
 
 
 class MainScene(Scene):
-    def __init__(
-            self, manager: SceneManager, screen: pygame.Surface, sprites: dict
-    ):
+    def __init__(self, manager: SceneManager, screen: pygame.Surface, sprites: dict):
         super().__init__(manager, screen, sprites)
 
         self.previous_time = None
-        
+
         # Select which map to load
         with open("game_files/maps/map.json", "r") as main_map:
             MAP = json.load(main_map)
-        
+
         # Where the graphics are location, pixel size, and scale factor
         self.tileset = Tileset("gfx/rpg_sprites.png", 16, 4)
         # Create our tilemap
@@ -39,7 +32,7 @@ class MainScene(Scene):
 
         player_animations = {
             "walking_animations": self.sprites["player_walk"],
-            "attack_animation": self.sprites["player_attack"]
+            "attack_animation": self.sprites["player_attack"],
         }
         # Spawn the player with animations and what location
         self.player = Player(player_animations, 100, 100)
@@ -51,7 +44,7 @@ class MainScene(Scene):
             pygame.K_w: "up",
             pygame.K_s: "down",
             pygame.K_a: "left",
-            pygame.K_d: "right"
+            pygame.K_d: "right",
         }
 
         self.keystack = []
@@ -84,19 +77,19 @@ class MainScene(Scene):
         # Go through our map and render the map
         for y in self.tilemap.map:
             for x in y:
-                self.screen.blit(x.sprite, (
-                    x.x + self.camera.get_camera_adjustments()[0],
-                    x.y + self.camera.get_camera_adjustments()[1]
-                    )
+                self.screen.blit(
+                    x.sprite,
+                    (
+                        x.x + self.camera.get_camera_adjustments()[0],
+                        x.y + self.camera.get_camera_adjustments()[1],
+                    ),
                 )
 
         self.enemy.render(self.screen, self.camera.get_camera_adjustments())
         self.player.render(self.screen, self.camera.get_camera_adjustments())
 
         for projectile in self.projectiles:
-            projectile.render(
-                self.screen, self.camera.get_camera_adjustments()
-            )
+            projectile.render(self.screen, self.camera.get_camera_adjustments())
 
         # Update display
         pygame.display.update()
@@ -111,31 +104,27 @@ class MainScene(Scene):
                 self.player.attack()
                 if self.player.direction == "up":
                     projectile = Projectile(
-                        {
-                            "projectile": self.sprites["projectile"]
-                        },
-                        self.player.x + 16, self.player.y - 16
+                        {"projectile": self.sprites["projectile"]},
+                        self.player.x + 16,
+                        self.player.y - 16,
                     )
                 elif self.player.direction == "down":
                     projectile = Projectile(
-                        {
-                            "projectile": self.sprites["projectile"]
-                        },
-                        self.player.x + 16, self.player.y + 50
+                        {"projectile": self.sprites["projectile"]},
+                        self.player.x + 16,
+                        self.player.y + 50,
                     )
                 elif self.player.direction == "left":
                     projectile = Projectile(
-                        {
-                            "projectile": self.sprites["projectile"]
-                        },
-                        self.player.x - 16, self.player.y + 16
+                        {"projectile": self.sprites["projectile"]},
+                        self.player.x - 16,
+                        self.player.y + 16,
                     )
                 elif self.player.direction == "right":
                     projectile = Projectile(
-                        {
-                            "projectile": self.sprites["projectile"]
-                        },
-                        self.player.x + 50, self.player.y + 16
+                        {"projectile": self.sprites["projectile"]},
+                        self.player.x + 50,
+                        self.player.y + 16,
                     )
                 projectile.set_direction(self.player.direction)
                 self.projectiles.append(projectile)

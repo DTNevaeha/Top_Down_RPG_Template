@@ -1,6 +1,7 @@
 import pygame
 
 from game_files.animations.animation_manager import AnimationManager
+from game_files.config import map_width, map_height
 
 
 class Player:
@@ -32,15 +33,18 @@ class Player:
         self.animations.register_animation("attack_right", [3, 3, 3, 3], "attack_animation")
 
     def move(self, dt):
+        self.height = 4
+        self.width = 16
+
         # Prevent the player from leaving the set map. This only works if the map size never changes
         if self.y < 0:
             self.y = 0
         elif self.x < 0:
             self.x = 0
-        elif self.y > 680:
-            self.y = 680
-        elif self.x > 1520:
-            self.x = 1520
+        elif self.y > map_height - self.height:
+            self.y = map_height - self.height
+        elif self.x > map_width - self.width:
+            self.x = map_width - self.width
 
         if self.direction == "up":
             self.y -= self.velocity * dt
