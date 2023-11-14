@@ -52,6 +52,11 @@ class MainScene(Scene):
 
         self.projectiles = []
 
+        self.font = pygame.font.SysFont("Arial", 36)
+        self.health_text = "Health: " + str(self.player.health)
+        self.health_text_x = 50
+        self.health_text_y = 25
+
     def update(self):
         if self.previous_time is None:
             # First run through the loop needs a previous_time value to compute
@@ -67,7 +72,9 @@ class MainScene(Scene):
 
         max_distance = 250
         # If projectiles have moved further than the max distance then they are removed from the list
-        self.projectiles = [p for p in self.projectiles if not p.has_traveled_too_far(max_distance)]
+        self.projectiles = [
+            p for p in self.projectiles if not p.has_traveled_too_far(max_distance)
+        ]
         for projectile in self.projectiles:
             projectile.update(dt)
 
@@ -87,6 +94,11 @@ class MainScene(Scene):
                         x.y + self.camera.get_camera_adjustments()[1],
                     ),
                 )
+
+        self.screen.blit(
+            self.font.render(self.health_text, True, (255, 255, 255)),
+            (self.health_text_x, self.health_text_y),
+        )
 
         self.enemy.render(self.screen, self.camera.get_camera_adjustments())
         self.player.render(self.screen, self.camera.get_camera_adjustments())
@@ -132,7 +144,6 @@ class MainScene(Scene):
                 projectile.set_direction(self.player.direction)
                 self.projectiles.append(projectile)
 
-
             if event.type == pygame.KEYDOWN and event.key in self.keybinds:
                 self.keystack.append(event.key)
 
@@ -151,4 +162,3 @@ class MainScene(Scene):
             if len(self.keystack) == 0:
                 self.current_key = None
                 self.player.stop_moving()
-    

@@ -13,6 +13,7 @@ class Player:
         self.moving = False
         # Character sheet, pixel count, and scale factor
         self.animations = AnimationManager(sprite_sheets, 16, 4)
+        self.health = 100
 
         # Walking animations
         self.animations.register_animation("walking_right", [3, 7, 11, 15], "walking_animations")
@@ -27,10 +28,10 @@ class Player:
         self.animations.register_animation("stationary_right", [3, 3, 3], "walking_animations")
 
         # Attacks
-        self.animations.register_animation("attack_down", [0, 0, 0, 0], "attack_animation")
-        self.animations.register_animation("attack_up", [1, 1, 1, 1], "attack_animation")
-        self.animations.register_animation("attack_left", [2, 2, 2, 2], "attack_animation")
-        self.animations.register_animation("attack_right", [3, 3, 3, 3], "attack_animation")
+        self.animations.register_animation("attack_down", [0, 0, 0], "attack_animation")
+        self.animations.register_animation("attack_up", [1, 1, 1], "attack_animation")
+        self.animations.register_animation("attack_left", [2, 2, 2], "attack_animation")
+        self.animations.register_animation("attack_right", [3, 3, 3], "attack_animation")
 
     def move(self, dt):
         self.height = 4
@@ -56,8 +57,8 @@ class Player:
             self.x += self.velocity * dt
 
     def attack(self):
-        self.animations.activate_animation("attack_" + self.direction, 0.1, False)
-
+        self.animations.activate_animation("attack_" + self.direction, 0.15, False)
+    
     def set_direction(self, new_direction: str):
         self.direction = new_direction
 
