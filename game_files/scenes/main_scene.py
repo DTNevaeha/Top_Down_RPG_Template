@@ -58,13 +58,16 @@ class MainScene(Scene):
             #  delta time to ensure everything is on the same time
             self.previous_time = time.time()
         # Delta time
-        now = time.time()
-        dt = now - self.previous_time
-        self.previous_time = now
+        current_time = time.time()
+        dt = current_time - self.previous_time
+        self.previous_time = current_time
 
         self.enemy.update(dt)
         self.player.update(dt)
 
+        max_distance = 250
+        # If projectiles have moved further than the max distance then they are removed from the list
+        self.projectiles = [p for p in self.projectiles if not p.has_traveled_too_far(max_distance)]
         for projectile in self.projectiles:
             projectile.update(dt)
 
@@ -129,6 +132,7 @@ class MainScene(Scene):
                 projectile.set_direction(self.player.direction)
                 self.projectiles.append(projectile)
 
+
             if event.type == pygame.KEYDOWN and event.key in self.keybinds:
                 self.keystack.append(event.key)
 
@@ -147,3 +151,4 @@ class MainScene(Scene):
             if len(self.keystack) == 0:
                 self.current_key = None
                 self.player.stop_moving()
+    
