@@ -41,7 +41,7 @@ This RPG starter pack contains assets for the following
 
 ## Whats Not Included
 
-- **Collision**: There is currently only collision setup for the default map size so the player cannot leave the island border, this does not work if the map size changes.
+- **Collision**: There is currently only collision setup for the map size so the player cannot leave the island border.
 
 - **Fighting**: The enemy currently does nothing, victory, or losing scenario
 
