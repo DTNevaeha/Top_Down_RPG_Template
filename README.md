@@ -45,8 +45,7 @@ This RPG starter pack contains assets for the following
 
 - **Fighting**: The enemy currently does nothing, victory, or losing scenario
 
-- **End projectiles**: The projectiles will continue on forever, never
-                        disappearing or being removed
+- **End projectiles**: The projectiles will disappear after traveling a distance of 250
 
 - **Victory/End**: There is no current victory scenario or way to lose
 
