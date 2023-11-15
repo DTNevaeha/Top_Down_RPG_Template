@@ -8,6 +8,7 @@ class Enemy:
         self.sprite_sheets = sprite_sheets
         self.x = x
         self.y = y
+        self.health = 30
 
         # Enemy sprite, pixil count, and size scale
         self.animations = AnimationManager(sprite_sheets, 50, 4)

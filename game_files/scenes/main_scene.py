@@ -53,6 +53,8 @@ class MainScene(Scene):
         self.projectiles = []
 
         self.font = pygame.font.SysFont("Arial", 36)
+
+        # Setup player health 
         self.health_text = "Health: " + str(self.player.health)
         self.health_text_x = 50
         self.health_text_y = 25
@@ -95,12 +97,16 @@ class MainScene(Scene):
                     ),
                 )
 
+        # Load health bar
         self.screen.blit(
             self.font.render(self.health_text, True, (255, 255, 255)),
             (self.health_text_x, self.health_text_y),
         )
 
+        # Load enemy
         self.enemy.render(self.screen, self.camera.get_camera_adjustments())
+
+        # Load player
         self.player.render(self.screen, self.camera.get_camera_adjustments())
 
         for projectile in self.projectiles:
