@@ -22,6 +22,7 @@ class Enemy:
     
     def take_damage(self, damage: int): 
         self.health -= damage
+        # This is entirely for debugging purposes
         print(self.health)
 
     def update(self, dt):
