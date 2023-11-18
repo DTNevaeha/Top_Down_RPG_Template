@@ -4,7 +4,7 @@ from setuptools import setup
 setup(
     name='rpg-template',
     version='1.0.0',
-    description='Flappy ball',
+    description='RPG Template',
     author='Blake Ellsworth',
     author_email='DTNevaeha@gmail.com',
     url='https://github.com/DTNevaeha/top_down_RPG',

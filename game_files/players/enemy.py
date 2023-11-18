@@ -9,6 +9,8 @@ class Enemy:
         self.x = x
         self.y = y
         self.health = 30
+        self.width = 200
+        self.height = 200
 
         # Enemy sprite, pixil count, and size scale
         self.animations = AnimationManager(sprite_sheets, 50, 4)
@@ -17,6 +19,10 @@ class Enemy:
                                            "enemy_idle"
                                            )
         self.animations.activate_animation("idle", 0.1, True)
+    
+    def take_damage(self, damage: int): 
+        self.health -= damage
+        print(self.health)
 
     def update(self, dt):
         self.animations.update(dt)

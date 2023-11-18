@@ -12,6 +12,9 @@ class Projectile:
         self.direction = "right"
         self.distance_traveled = 0
         self.moving = True
+        self.damage = 10
+        self.width = 16
+        self.height = 16
 
         self.animations = AnimationManager(sprite_sheets, 16, 2)
         self.animations.register_animation("projectile", [0, 1, 2, 3, 4], "projectile")

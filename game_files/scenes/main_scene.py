@@ -109,11 +109,21 @@ class MainScene(Scene):
         # Load player
         self.player.render(self.screen, self.camera.get_camera_adjustments())
 
+        # Load projectiles
         for projectile in self.projectiles:
             projectile.render(self.screen, self.camera.get_camera_adjustments())
 
         # Update display
         pygame.display.update()
+
+    def collision_check(self, projectile, enemy):
+        # Check if projectile is colliding with the enemy
+        return (
+            projectile.x < self.enemy.x + self.enemy.width and
+            projectile.x + projectile.width >= self.enemy.x and
+            projectile.y < self.enemy.y + enemy.height and
+            projectile.y + projectile.height >= self.enemy.y
+        )
 
     def poll_events(self):
         for event in pygame.event.get():
@@ -155,6 +165,16 @@ class MainScene(Scene):
 
             if event.type == pygame.KEYUP and event.key in self.keybinds:
                 self.keystack.remove(event.key)
+
+            # if a projectile hits the enemy, then the enemy takes damage
+            projectiles_to_remove = []
+            for projectile in self.projectiles:
+                if self.collision_check(projectile, self.enemy):
+                    self.enemy.take_damage(projectile.damage)
+                    projectiles_to_remove.append(projectile)
+            
+            for projectile in projectiles_to_remove:
+                self.projectiles.remove(projectile)
 
             # If keystack has keys inside it
             if len(self.keystack) > 0:
